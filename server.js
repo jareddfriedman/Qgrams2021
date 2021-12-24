@@ -165,7 +165,8 @@ var io = require("socket.io")(server, {
   cors: {
     origin: "http://159.203.75.43/",
     methods: ["GET", "POST"]
-  }
+  },
+  allowEIO3: true
 });
 
 io.sockets.on('connection',
