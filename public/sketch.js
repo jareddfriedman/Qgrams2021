@@ -116,7 +116,7 @@ function setup() {
 
   isMob = window.mobileCheck();
 
-  socket = io.connect('http://10.108.0.2:3000');
+  socket = io.connect('http://159.203.75.43/:3000');
 
   //socket = io.connect('http://localhost:3000');
 
