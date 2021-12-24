@@ -161,7 +161,12 @@ function saveLists() {
 
 app.use(express.static('public'));
 
-var io = require('socket.io')(server);
+var io = require("socket.io")(server, {
+  cors: {
+    origin: "https://example.com",
+    methods: ["GET", "POST"]
+  }
+});
 
 io.sockets.on('connection',
   // We are given a websocket object in our function
