@@ -139,6 +139,7 @@ function setup() {
     socket.on('yourID',
       function(data) {
         socketID = data;
+        console.log("I got the yourid package");
       });
 
   socket.on('test',
