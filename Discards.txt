@@ -1,0 +1,107 @@
+function drawTiles(){
+  for (var i = 0; i < specTiles.length; i++) {
+    if (specTiles[i].disp != false) {
+      stroke(0);
+      fill(255);
+      rectMode(CENTER);
+      rect(specTiles[i].x, specTiles[i].y, 30, 30);
+      noStroke();
+      fill(0);
+      textAlign(CENTER, CENTER);
+      text(specTiles[i].letter, specTiles[i].x, specTiles[i].y);
+    }
+  }
+}
+
+  for (var i = 0; i < specTiles.length; i++) {
+    if (mouseX > specTiles[i].x-15 && mouseX <specTiles[i].x+15 && mouseY > specTiles[i].y-15 && mouseY <specTiles[i].y+15 && specTiles[i].disp != false) {
+      specTiles[i].x = mouseX;
+      specTiles[i].y = mouseY;
+    }
+  }
+
+function buildTiles() {
+
+  comTiles[0].x = 683;
+  comTiles[0].y = 200;
+  if (comTiles.length > 1) {
+  for (var i = 1; i < comTiles.length; i++) {
+    var ns = floor((i-1)/2);
+    if (i % 2 == 0) {
+      comTiles[i].x = 783;
+    } else {
+      comTiles[i].x = 583;
+    }
+
+    comTiles[i].y = ns * 100 + 300;
+    }
+  }
+
+  socket.emit('hereComTiles', comTiles);
+}
+
+
+function sendWord(word) {
+  var noteWd = join(word, '');
+  console.log("sending out: " + noteWd);
+
+  socket.emit('word', word);
+
+SERVER:
+
+function manageTiles() {
+  if (activeTiles.length >= 1) {
+    for (var i = 0; i < activeTiles.length; i++) {
+      var aT = activeTiles[i];
+      if (dragX > aT.xmin && dragX < aT.xmax && dragY > aT.ymin && dragY < aT.ymax) {
+        io.emit('updateTile', i, dragX, dragY);
+      }
+    }
+  }
+}
+}
+
+CLiENT OLD MOUSE RELKEASED
+
+  for (var i = 0; i < specTiles.length; i++) {
+    if (specTiles[i].x == 0 && specTiles[i].y == 0 && specTiles[i].disp == false) {
+      specTiles[i].x = 300;
+      specTiles[i].y = 300;
+      specTiles[i].disp = true;
+      break;
+    }
+  }
+
+Overly-complicated FindMe for server:
+
+  socket.on('fiXXndMe',
+  function(data) {
+    if (gameRooms.length === 0) {
+      var newName = nameGen();
+      gameRooms.push (new GameRoom(newName, socket.id, data));
+      gameRooms[0].open = false;
+      getStarted(gameRooms[0]);
+      socket.join(gameRooms[0].roomName);
+      socket.emit('waitHereFriend', "x");
+    } else {
+      console.log('recognize somebody here');
+      var waiters = [];
+      for (var i = 0; i < gameRooms.length; i++) {
+        if(gameRooms[i].p2 === 0 && !gameRooms[i].open) {
+          waiters.push(gameRooms[i]);
+          console.log('pushing waiter');
+        }
+      }
+      if (waiters.length === 0) {
+        var newName = nameGen();
+        gameRooms.push (new GameRoom(newName, socket.id, data));
+        gameRooms[0].open = false;
+        getStarted(gameRooms[0]);
+        socket.join(gameRooms[0].roomName);
+        socket.emit('waitHereFriend', "x");
+      } else {
+        socket.emit('weWait', waiters);
+      }
+    }
+  }
+);

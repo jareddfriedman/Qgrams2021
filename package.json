@@ -1,0 +1,21 @@
+{
+  "name": "qgrams",
+  "version": "1.0.0",
+  "description": "Quarantinagrams!!",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "anagrams",
+    "quarantine"
+  ],
+  "author": "Jared Friedman",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2",
+    "node-datetime": "^2.1.2",
+    "socket.io": "^2.4.1"
+  }
+}
